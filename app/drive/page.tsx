@@ -47,7 +47,7 @@ export default async function DrivePage({ searchParams }: DrivePageProps) {
     redirect("/");
   }
 
-  let files = [];
+  let files: Awaited<ReturnType<typeof listGoogleDriveFiles>> = [];
   let driveError: string | null = null;
 
   try {

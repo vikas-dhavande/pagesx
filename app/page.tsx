@@ -7,38 +7,53 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import { signInWithGoogle, signOut } from "@/actions/auth";
 import { SiteHeader } from "@/components/site-header";
+import { createClient } from "@/lib/supabase/server";
 
 const featureCards = [
   {
-    title: "A clear first impression",
+    title: "Supabase handles the Google sign-in",
     description:
-      "Strong copy, visual hierarchy, and calls to action that make the landing page feel intentional from the first scroll.",
+      "The app keeps Supabase for authentication and session cookies, then layers Google Drive access on top instead of introducing a separate auth stack.",
     icon: Sparkles,
   },
   {
-    title: "Built for fast iteration",
+    title: "Google Drive is the active file service",
     description:
-      "Reusable sections and clean component structure so the home page can grow into a full product site without a rewrite.",
+      "The new Drive service lists files and uploads files on the server, replacing the old S3 path that the project was no longer using.",
     icon: Layers3,
   },
   {
-    title: "Ready to launch",
+    title: "There is a real workspace to test it",
     description:
-      "Responsive layout, accessible navigation, and polished styling that work on desktop and mobile from day one.",
+      "A dedicated `/drive` route and `/api/drive/files` endpoint give you a clear place to verify uploads and expand the integration.",
     icon: Rocket,
   },
 ];
 
 const stats = [
-  { value: "01", label: "Responsive header and navigation" },
-  { value: "02", label: "Focused hero section for your main pitch" },
-  { value: "03", label: "Feature blocks to explain your value" },
+  { value: "01", label: "Supabase Google OAuth entry on the homepage" },
+  { value: "02", label: "Drive API upload and file listing flow" },
+  { value: "03", label: "Old AWS file path removed from active use" },
 ];
 
-export default function Page() {
+type HomePageProps = {
+  searchParams: Promise<{ message?: string }>;
+};
+
+export default async function Page({ searchParams }: HomePageProps) {
+  const params = await searchParams;
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
-    <div id="top" className="relative min-h-screen overflow-hidden bg-background text-foreground">
+    <div
+      id="top"
+      className="relative min-h-screen overflow-hidden bg-background text-foreground"
+    >
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-0 top-0 h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,_rgba(54,125,96,0.22),_transparent_68%)] blur-3xl" />
         <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,_rgba(197,143,76,0.18),_transparent_68%)] blur-3xl" />
@@ -61,34 +76,62 @@ export default function Page() {
           <div className="flex flex-col justify-center">
             <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[color:var(--border)] bg-white/70 px-4 py-2 text-sm text-[color:var(--muted)] shadow-[0_10px_25px_rgba(21,18,13,0.06)] backdrop-blur">
               <BadgeCheck className="h-4 w-4 text-[color:var(--accent)]" />
-              Home page refresh for the PagesX site
+              Supabase OAuth with Google Drive is now wired in
             </div>
 
             <h1 className="mt-8 max-w-4xl text-5xl font-semibold tracking-[-0.05em] text-[color:var(--foreground)] sm:text-6xl lg:text-7xl">
-              Build a homepage that feels sharp, modern, and ready to ship.
+              Keep Supabase for login and switch the file layer to Google Drive.
             </h1>
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-[color:var(--muted)] sm:text-xl">
-              This landing page gives your project a stronger entry point with
-              a real header, a focused hero, and section blocks that explain
-              what your site does without feeling generic.
+              The homepage now starts the Google sign-in flow, the backend stores
+              the provider tokens for Drive requests, and the project has a
+              working Drive workspace instead of the unused AWS path.
             </p>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Link
-                href="#features"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--foreground)] px-6 py-3.5 text-sm font-semibold text-white transition hover:translate-y-[-1px]"
-              >
-                Explore the home page
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="#process"
-                className="inline-flex items-center justify-center rounded-full border border-[color:var(--border)] bg-white/65 px-6 py-3.5 text-sm font-semibold text-[color:var(--foreground)] backdrop-blur transition hover:bg-white"
-              >
-                View structure
-              </Link>
-            </div>
+            {params.message ? (
+              <div className="mt-6 max-w-xl rounded-2xl border border-[color:var(--border)] bg-[rgba(47,106,83,0.08)] px-4 py-3 text-sm text-[color:var(--foreground)]">
+                {params.message}
+              </div>
+            ) : null}
+
+            {user ? (
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                <Link
+                  href="/drive"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--foreground)] px-6 py-3.5 text-sm font-semibold text-white transition hover:translate-y-[-1px]"
+                >
+                  Open Drive workspace
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <form action={signOut}>
+                  <button
+                    type="submit"
+                    className="inline-flex w-full items-center justify-center rounded-full border border-[color:var(--border)] bg-white/65 px-6 py-3.5 text-sm font-semibold text-[color:var(--foreground)] backdrop-blur transition hover:bg-white sm:w-auto"
+                  >
+                    Sign out
+                  </button>
+                </form>
+              </div>
+            ) : (
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                <form action={signInWithGoogle}>
+                  <button
+                    type="submit"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--foreground)] px-6 py-3.5 text-sm font-semibold text-white transition hover:translate-y-[-1px] sm:w-auto"
+                  >
+                    Connect Google Drive
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                </form>
+                <Link
+                  href="#features"
+                  className="inline-flex items-center justify-center rounded-full border border-[color:var(--border)] bg-white/65 px-6 py-3.5 text-sm font-semibold text-[color:var(--foreground)] backdrop-blur transition hover:bg-white"
+                >
+                  See what changed
+                </Link>
+              </div>
+            )}
           </div>
 
           <div className="flex items-center">
@@ -96,14 +139,14 @@ export default function Page() {
               <div className="flex items-center justify-between border-b border-[color:var(--border)] pb-5">
                 <div>
                   <p className="text-sm uppercase tracking-[0.28em] text-[color:var(--muted)]">
-                    Homepage Preview
+                    Integration Preview
                   </p>
                   <h2 className="mt-2 text-2xl font-semibold text-[color:var(--foreground)]">
-                    PagesX landing experience
+                    PagesX + Google Drive
                   </h2>
                 </div>
                 <div className="rounded-full border border-[color:var(--border)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--accent)]">
-                  Live layout
+                  OAuth ready
                 </div>
               </div>
 
@@ -128,8 +171,9 @@ export default function Page() {
                   Why this works
                 </p>
                 <p className="mt-3 max-w-md text-lg leading-8 text-white/86">
-                  The page is structured to help visitors understand your brand,
-                  your offering, and the next action within a few seconds.
+                  The UI and the backend now support the same flow: Google login
+                  on the homepage, Drive actions in the workspace, and no active
+                  dependency on the old S3 code path.
                 </p>
               </div>
             </div>
@@ -146,13 +190,13 @@ export default function Page() {
                 Features
               </p>
               <h2 className="mt-3 max-w-2xl text-3xl font-semibold tracking-[-0.04em] text-[color:var(--foreground)] sm:text-4xl">
-                A clean homepage foundation you can keep building on.
+                The homepage now introduces the real Google Drive flow.
               </h2>
             </div>
             <p className="max-w-xl text-base leading-7 text-[color:var(--muted)]">
-              Instead of a placeholder splash screen, the homepage now has a
-              proper story arc: introduction, value, structure, and a clear next
-              step.
+              Instead of leaving storage tied to unused AWS helpers, the app now
+              starts with Supabase Google OAuth and points users toward the
+              Drive workspace that actually matches your stack.
             </p>
           </div>
 
@@ -190,7 +234,7 @@ export default function Page() {
                 Process
               </p>
               <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-[color:var(--foreground)] sm:text-4xl">
-                Header first, then the message, then the proof.
+                Sign in with Supabase, then work with Drive.
               </h2>
             </div>
 
@@ -200,8 +244,8 @@ export default function Page() {
                   Step 01
                 </p>
                 <p className="mt-3 text-base leading-7 text-[color:var(--muted)]">
-                  A simple header gives the site a recognizable frame and makes
-                  navigation feel complete right away.
+                  Supabase starts the Google OAuth flow and keeps the app on the
+                  same session model it already used.
                 </p>
               </div>
               <div className="rounded-[1.5rem] border border-[color:var(--border)] bg-white/70 px-5 py-5">
@@ -209,8 +253,8 @@ export default function Page() {
                   Step 02
                 </p>
                 <p className="mt-3 text-base leading-7 text-[color:var(--muted)]">
-                  The hero section states the purpose of the site with stronger
-                  copy and action buttons instead of abstract animation alone.
+                  The callback stores the Google provider tokens so server-side
+                  Drive requests can list files and upload files for the user.
                 </p>
               </div>
               <div className="rounded-[1.5rem] border border-[color:var(--border)] bg-white/70 px-5 py-5">
@@ -218,8 +262,8 @@ export default function Page() {
                   Step 03
                 </p>
                 <p className="mt-3 text-base leading-7 text-[color:var(--muted)]">
-                  Feature sections turn the page into a usable starting point for
-                  the rest of your marketing or product content.
+                  The `/drive` route and the JSON API give you a concrete place
+                  to verify the integration and build the next features on top.
                 </p>
               </div>
             </div>
@@ -237,12 +281,13 @@ export default function Page() {
             <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <div>
                 <h2 className="max-w-3xl text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl">
-                  Your project now has a homepage with a complete header and a
-                  stronger visual structure.
+                  Your project now uses Supabase OAuth plus Google Drive instead
+                  of the old AWS storage path.
                 </h2>
                 <p className="mt-4 max-w-2xl text-base leading-7 text-white/72">
-                  Use this as the base for adding more sections, linking real
-                  pages, or connecting the content to your product and brand.
+                  Use this as the base for adding folder support, richer Drive
+                  metadata, or a picker flow if you want access beyond files the
+                  app creates and manages.
                 </p>
               </div>
               <Link

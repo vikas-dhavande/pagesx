@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 const navigation = [
-  { href: "#features", label: "Features" },
-  { href: "#process", label: "Process" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#features", label: "Features" },
+  { href: "/#process", label: "Process" },
+  { href: "/drive", label: "Drive" },
 ];
 
 export function SiteHeader() {
@@ -37,10 +37,10 @@ export function SiteHeader() {
         </nav>
 
         <Link
-          href="#contact"
+          href="/drive"
           className="rounded-full bg-[color:var(--accent)] px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(20,72,55,0.18)] transition hover:bg-[color:var(--accent-strong)]"
         >
-          Start with PagesX
+          Open Drive
         </Link>
       </div>
     </header>
