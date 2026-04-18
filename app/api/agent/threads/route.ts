@@ -1,11 +1,15 @@
-import { AgentClient } from "@21st-sdk/agent"
+import { AgentClient } from "@21st-sdk/node"
 import { NextResponse } from "next/server"
 
 const client = new AgentClient({ apiKey: process.env.API_KEY_21ST! })
 
-export async function POST() {
+export async function POST(req: Request) {
   try {
-    const thread = await client.createThread()
+    const { sandboxId } = await req.json()
+    if (!sandboxId) {
+      return NextResponse.json({ error: "sandboxId is required" }, { status: 400 })
+    }
+    const thread = await client.threads.create({ sandboxId })
     return NextResponse.json(thread)
   } catch (error) {
     return NextResponse.json(
@@ -15,9 +19,14 @@ export async function POST() {
   }
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
-    const threads = await client.listThreads()
+    const { searchParams } = new URL(req.url)
+    const sandboxId = searchParams.get("sandboxId")
+    if (!sandboxId) {
+      return NextResponse.json({ error: "sandboxId is required" }, { status: 400 })
+    }
+    const threads = await client.threads.list({ sandboxId })
     return NextResponse.json(threads)
   } catch (error) {
     return NextResponse.json(
