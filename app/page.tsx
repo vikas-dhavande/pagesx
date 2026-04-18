@@ -55,13 +55,13 @@ export default async function Page({ searchParams }: HomePageProps) {
       className="relative min-h-screen overflow-hidden bg-background text-foreground"
     >
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-0 top-0 h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,_rgba(54,125,96,0.22),_transparent_68%)] blur-3xl" />
-        <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,_rgba(197,143,76,0.18),_transparent_68%)] blur-3xl" />
+        <div className="absolute left-0 top-0 h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.05),_transparent_68%)] blur-3xl" />
+        <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.03),_transparent_68%)] blur-3xl" />
         <div
           className="absolute inset-0 opacity-50"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(21,18,13,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(21,18,13,0.06) 1px, transparent 1px)",
+              "linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px)",
             backgroundSize: "min(6vw, 72px) min(6vw, 72px)",
             maskImage:
               "linear-gradient(to bottom, rgba(0,0,0,0.75), transparent 82%)",
@@ -74,7 +74,7 @@ export default async function Page({ searchParams }: HomePageProps) {
       <main className="relative z-10">
         <section className="grid gap-14 px-6 pb-20 pt-8 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:pb-28 lg:pt-16">
           <div className="flex flex-col justify-center">
-            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[color:var(--border)] bg-white/70 px-4 py-2 text-sm text-[color:var(--muted)] shadow-[0_10px_25px_rgba(21,18,13,0.06)] backdrop-blur">
+            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[color:var(--border)] bg-white/70 px-4 py-2 text-sm text-[color:var(--muted)] shadow-[0_10px_25px_rgba(0,0,0,0.04)] backdrop-blur">
               <BadgeCheck className="h-4 w-4 text-[color:var(--accent)]" />
               Supabase OAuth with Google Drive is now wired in
             </div>
@@ -135,7 +135,7 @@ export default async function Page({ searchParams }: HomePageProps) {
           </div>
 
           <div className="flex items-center">
-            <div className="w-full rounded-[2rem] border border-[color:var(--border)] bg-white/68 p-6 shadow-[0_30px_80px_rgba(21,18,13,0.12)] backdrop-blur-xl sm:p-8">
+            <div className="w-full rounded-[2rem] border border-[color:var(--border)] bg-white/68 p-6 shadow-[0_30px_80px_rgba(0,0,0,0.08)] backdrop-blur-xl sm:p-8">
               <div className="flex items-center justify-between border-b border-[color:var(--border)] pb-5">
                 <div>
                   <p className="text-sm uppercase tracking-[0.28em] text-[color:var(--muted)]">
@@ -207,7 +207,7 @@ export default async function Page({ searchParams }: HomePageProps) {
               return (
                 <article
                   key={item.title}
-                  className="rounded-[1.75rem] border border-[color:var(--border)] bg-white/72 p-7 shadow-[0_18px_50px_rgba(21,18,13,0.08)] backdrop-blur"
+                  className="rounded-[1.75rem] border border-[color:var(--border)] bg-white/72 p-7 shadow-[0_18px_50px_rgba(0,0,0,0.06)] backdrop-blur"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--accent)]/10 text-[color:var(--accent)]">
                     <Icon className="h-5 w-5" />
@@ -228,7 +228,7 @@ export default async function Page({ searchParams }: HomePageProps) {
           id="process"
           className="px-6 pb-20 lg:px-10 lg:pb-28"
         >
-          <div className="grid gap-8 rounded-[2rem] border border-[color:var(--border)] bg-[rgba(255,255,255,0.68)] p-8 shadow-[0_30px_80px_rgba(21,18,13,0.1)] backdrop-blur lg:grid-cols-[0.85fr_1.15fr] lg:p-10">
+          <div className="grid gap-8 rounded-[2rem] border border-[color:var(--border)] bg-[rgba(255,255,255,0.68)] p-8 shadow-[0_30px_80px_rgba(0,0,0,0.1)] backdrop-blur lg:grid-cols-[0.85fr_1.15fr] lg:p-10">
             <div>
               <p className="text-sm uppercase tracking-[0.26em] text-[color:var(--muted)]">
                 Process

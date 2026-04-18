@@ -22,8 +22,21 @@
   --destructive: #ef4444;
   --border: #e5e5e5;
   --input: #e5e5e5;
-  --ring: #000000;
   --radius: 0.5rem;
+  --ring: #000000;
+  --chart-1: #000000;
+  --chart-2: #27272a;
+  --chart-3: #52525b;
+  --chart-4: #71717a;
+  --chart-5: #a1a1aa;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #000000;
+  --sidebar-primary: #000000;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f5f5f5;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #e5e5e5;
+  --sidebar-ring: #000000;
   /* Custom variables preservation */
   --surface: #ffffff;
   --accent-strong: #000000;
@@ -93,7 +106,7 @@ a {
 }
 
 ::selection {
-  background: rgba(47, 106, 83, 0.18);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .dark {
@@ -115,6 +128,19 @@ a {
   --border: #27272a;
   --input: #27272a;
   --ring: #ffffff;
+  --chart-1: #ffffff;
+  --chart-2: #a1a1aa;
+  --chart-3: #71717a;
+  --chart-4: #52525b;
+  --chart-5: #27272a;
+  --sidebar: #000000;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #27272a;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #27272a;
+  --sidebar-ring: #ffffff;
 }
 
 @layer base {
