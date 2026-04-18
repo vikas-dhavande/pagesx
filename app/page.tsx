@@ -72,7 +72,7 @@ export default async function Page({ searchParams }: HomePageProps) {
       <SiteHeader />
 
       <main className="relative z-10">
-        <section className="mx-auto grid max-w-7xl gap-14 px-6 pb-20 pt-8 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:pb-28 lg:pt-16">
+        <section className="grid gap-14 px-6 pb-20 pt-8 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:pb-28 lg:pt-16">
           <div className="flex flex-col justify-center">
             <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[color:var(--border)] bg-white/70 px-4 py-2 text-sm text-[color:var(--muted)] shadow-[0_10px_25px_rgba(21,18,13,0.06)] backdrop-blur">
               <BadgeCheck className="h-4 w-4 text-[color:var(--accent)]" />
@@ -182,7 +182,7 @@ export default async function Page({ searchParams }: HomePageProps) {
 
         <section
           id="features"
-          className="mx-auto max-w-7xl px-6 pb-20 lg:px-10 lg:pb-28"
+          className="px-6 pb-20 lg:px-10 lg:pb-28"
         >
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -226,7 +226,7 @@ export default async function Page({ searchParams }: HomePageProps) {
 
         <section
           id="process"
-          className="mx-auto max-w-7xl px-6 pb-20 lg:px-10 lg:pb-28"
+          className="px-6 pb-20 lg:px-10 lg:pb-28"
         >
           <div className="grid gap-8 rounded-[2rem] border border-[color:var(--border)] bg-[rgba(255,255,255,0.68)] p-8 shadow-[0_30px_80px_rgba(21,18,13,0.1)] backdrop-blur lg:grid-cols-[0.85fr_1.15fr] lg:p-10">
             <div>
@@ -272,7 +272,7 @@ export default async function Page({ searchParams }: HomePageProps) {
 
         <section
           id="contact"
-          className="mx-auto max-w-7xl px-6 pb-24 lg:px-10 lg:pb-32"
+          className="px-6 pb-24 lg:px-10 lg:pb-32"
         >
           <div className="rounded-[2.25rem] bg-[color:var(--foreground)] px-8 py-10 text-white lg:px-10 lg:py-12">
             <p className="text-sm uppercase tracking-[0.28em] text-white/55">

@@ -9,7 +9,7 @@ const navigation = [
 export function SiteHeader() {
   return (
     <header className="relative z-20">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
+      <div className="flex items-center justify-between px-6 py-6 lg:px-10">
         <Link href="/" className="flex items-center gap-3">
           <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--border)] bg-white/70 text-sm font-semibold tracking-[0.24em] text-[color:var(--accent)] shadow-[0_12px_30px_rgba(20,72,55,0.08)] backdrop-blur">
             PX

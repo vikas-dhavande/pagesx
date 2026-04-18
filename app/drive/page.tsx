@@ -64,7 +64,7 @@ export default async function DrivePage({ searchParams }: DrivePageProps) {
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
 
-      <main className="mx-auto flex max-w-7xl flex-col gap-10 px-6 pb-20 pt-6 lg:px-10 lg:pb-28">
+      <main className="flex flex-col gap-10 px-6 pb-20 pt-6 lg:px-10 lg:pb-28">
         <section className="rounded-[2rem] border border-[color:var(--border)] bg-white/72 p-8 shadow-[0_24px_70px_rgba(21,18,13,0.09)] backdrop-blur">
           <p className="text-sm uppercase tracking-[0.24em] text-[color:var(--muted)]">
             Drive workspace
