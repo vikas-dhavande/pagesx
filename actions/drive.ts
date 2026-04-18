@@ -23,7 +23,17 @@ export async function uploadDriveFile(formData: FormData) {
   }
 
   try {
-    await uploadGoogleDriveFile(file);
+    const driveFile = await uploadGoogleDriveFile(file);
+
+    await supabase.from("files").insert({
+      uploader_id: user.id,
+      file_id: driveFile.id,
+      file_name: driveFile.name,
+      file_url:
+        driveFile.webViewLink ??
+        `https://drive.google.com/file/d/${driveFile.id}/view`,
+      file_type: driveFile.mimeType || "application/octet-stream",
+    });
   } catch (error) {
     const message =
       error instanceof Error

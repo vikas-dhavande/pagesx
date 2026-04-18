@@ -43,6 +43,13 @@ export async function GET(request: Request) {
     refreshToken: data.session?.provider_refresh_token,
   });
 
+  if (data.user) {
+    await supabase.from("profiles").upsert({
+      id: data.user.id,
+      email: data.user.email!,
+    });
+  }
+
   const redirectOrigin = getRedirectOrigin(request, requestUrl.origin);
   return NextResponse.redirect(new URL(next, redirectOrigin));
 }

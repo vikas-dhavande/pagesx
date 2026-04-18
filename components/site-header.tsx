@@ -4,6 +4,7 @@ const navigation = [
   { href: "/#features", label: "Features" },
   { href: "/#process", label: "Process" },
   { href: "/drive", label: "Drive" },
+  { href: "/chat", label: "Chat" },
 ];
 
 export function SiteHeader() {
