@@ -1,0 +1,17 @@
+# Website Color Palette (Monochrome)
+
+This website uses a strict Black and White color combination for all UI/UX elements to achieve a high-contrast, premium aesthetic.
+
+## Primary Colors
+- **Page Background**: #FFFFFF (Pure White)
+- **Primary Text / Foreground**: #000000 (Pure Black)
+
+## Supporting Shades
+- **Secondary / Muted Text**: #737373 (Neutral Gray) - Used for descriptions and less emphasized content while maintaining monochrome consistency.
+- **Borders / Dividers**: #E5E5E5 (Light Gray) - Used for subtle structure without introducing color.
+- **Surface / Cards**: #FFFFFF (White) with optional subtle shadows.
+
+## Usage Guidelines
+- No colored gradients or tints.
+- Interactive elements (buttons, links) use inversion or bolding rather than color for hover states.
+- High contrast is prioritized for readability and visual impact.

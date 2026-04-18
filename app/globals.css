@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4ede2;
-  --foreground: #15120d;
-  --surface: rgba(255, 255, 255, 0.64);
-  --muted: #6a6255;
-  --accent: #2f6a53;
-  --accent-strong: #1c4636;
-  --border: rgba(21, 18, 13, 0.1);
+  --background: #ffffff;
+  --foreground: #000000;
+  --surface: #ffffff;
+  --muted: #737373;
+  --accent: #000000;
+  --accent-strong: #000000;
+  --border: #e5e5e5;
 }
 
 @theme inline {
@@ -27,10 +27,7 @@ html {
 
 body {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(74, 144, 113, 0.16), transparent 32%),
-    radial-gradient(circle at bottom right, rgba(214, 166, 102, 0.14), transparent 28%),
-    var(--background);
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
